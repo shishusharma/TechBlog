@@ -142,7 +142,12 @@
                             } else
                             {
 
-                                swal(data);
+                                swal(data+
+                                "\n\
+                                Error occur due to fllowing reseion\n\
+                                Please fill and check all the column\n\
+                                Email Id allreday Exits \n\
+                                ");
                             }
 
                         },

@@ -9,6 +9,8 @@ public class UserDao {
         this.con=con;
     }
     
+      
+    
     //method to insert user to data base
     public boolean saveUser(User user){
         boolean f=false;
@@ -31,6 +33,39 @@ public class UserDao {
             System.out.println("UserDao --> "+ex);
         }
         return f;
+    }
+    
+    ///get user by useremail and userpassword:
+    public User getUserByEmailAndPassword(String userEmail,String userPassword){
+        User user=null;
+        try{
+           String query="select * from user where email=? and password=?" ;
+            System.out.println("com.tech.blog.dao.UserDao.getUserByEmailAndPassword()"+userEmail+" "+userPassword);
+           PreparedStatement pstmt=con.prepareStatement(query);
+           pstmt.setString(1, userEmail);
+           pstmt.setString(2, userPassword);
+           ResultSet set=pstmt.executeQuery();
+           if(set.next()){
+               user=new User();
+               
+               String name=set.getString("name");
+               System.out.println("com.tech.blog.dao.UserDao.getUserByEmailAndPassword() "+name);
+               user.setName(name);
+               user.setId(Integer.parseInt(set.getString("id")));
+               user.setEmail(set.getString("email"));
+               user.setPassword(set.getString("password"));
+               user.setGender(set.getString("gender"));
+               user.setAbout(set.getString("about"));
+               user.setDateTime(set.getTimestamp("rdate"));
+               user.setProfile(set.getString("profile"));
+               
+               
+           }
+        }catch(Exception ex){
+            System.out.println("com.tech.blog.dao.UserDao.getUserByEmailAndPassword() "+ex);
+        }
+        
+        return user;
     }
    
 }
