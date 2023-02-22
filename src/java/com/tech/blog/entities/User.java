@@ -4,6 +4,7 @@
  */
 package com.tech.blog.entities;
 
+import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 
 
@@ -37,6 +38,9 @@ public class User {
         this.gender = gender;
         this.about = about;
     }
+    
+    
+    
     
     //getters and setters
 
